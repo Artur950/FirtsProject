@@ -1,16 +1,8 @@
 def delete_empty_tuple():
     aList = [(), (), ('',), ('a', 'b'), ('a', 'b', 'c'), ('d')]
     print(aList)
-    for i in aList:
-        if len(i) == 0:
-            aList.remove(i)
-        else:
-            print(i)
-    print(aList)
-    for i in aList:
-        if len(i) == 0:
-            aList.remove(i)
-        else:
-            print(i)
-    print(aList)
+    resultList = [i for i in aList if i != ()]
+    print(resultList)
+
+
 delete_empty_tuple()
