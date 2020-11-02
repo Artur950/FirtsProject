@@ -1,3 +1,4 @@
+# Составили программу генерации имен используя строки 'JKLMNOPQ' и 'ack'
 def generate_name():
     S_begin='JKLMNOPQ'
     S_end='ack'
