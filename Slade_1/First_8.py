@@ -4,14 +4,15 @@ def dictionary():
                   "age": "возраст",
                   "answer": "ответ",
                   "bank": "банк",
-                  "chess": "шахматы" ,
+                  "chess": "шахматы",
                   "apple": "яблоко",
-                  "age": "возраст",}
-
-
-
-
-
+                  "age": "возраст",
+                  "answer": "ответ",
+                  "answer": "ответ",
+                  "age": "возраст",
+                  "cost": "стоить",
+                  "age": "возраст"}
+    print(sorted(dictionary.items()))
 
 
 
