@@ -13,7 +13,6 @@ def counter():
     dict_counter = dict.fromkeys(sorted(set_keys))
     for j in dict_counter:
         dict_counter[j] = 0
-    print(dict_counter)
 
     for i in original_list_of_dictionaries:
         for k in dict_counter.keys():
