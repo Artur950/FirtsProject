@@ -1,20 +1,42 @@
 # -*- coding: utf-8 -*-
-import Parser
+import sys
+from Parser import Parser
+from Gui_for_convert import Ui_MainWindow
+from PyQt5 import QtWidgets
 
 
-class Currency:
+class CurrencyConv(QtWidgets.QMainWindow):
     current_converted_price = {}
 
     def __init__(self):
-        # Установка курса валюты при создании объекта
-        self.current_converted_price = Parser.get_list_currencies()
+        super(CurrencyConv, self).__init__()
+        parser = Parser()
+        self.current_converted_price = parser.get_currencies()
+        self.ui = Ui_MainWindow()
+        self.ui.setupUi(self)
+        self.init_ui()
 
-    def check_currency(self):
-        for k in self.current_converted_price.keys():
-            print('1 ' + str(k) + ' стоит ' + str(self.current_converted_price[k]))
-            # return '1 ' + str(k) + ' стоит ' + str(self.current_converted_price[k])
+    def init_ui(self):
+        self.setWindowTitle('Конвертер валют')
+
+        self.ui.comboBox_input.addItems(self.current_converted_price.keys())
+        self.ui.input_currency.setPlaceholderText('Сколько конвертировать?')
+
+        self.ui.comboBox_output.addItems(self.current_converted_price.keys())
+        self.ui.output_currency.setPlaceholderText('Сегодня ВЫ получите')
+        self.ui.convert.clicked.connect(self.converter)
+
+    def converter(self):
+        input_currency = self.ui.comboBox_input.currentText()
+        input_value = self.ui.input_currency.text()
+
+        output_currency = self.ui.comboBox_output.currentText()
+        output_value = round((float(input_value) * float(self.current_converted_price[input_currency])) \
+                       / float(self.current_converted_price[output_currency]), 2)
+        self.ui.output_currency.setText(str(output_value))
 
 
-# Создание объекта и вызов метода
-currency = Currency()
-currency.check_currency()
+app = QtWidgets.QApplication([])
+application = CurrencyConv()
+application.show()
+sys.exit(app.exec())
